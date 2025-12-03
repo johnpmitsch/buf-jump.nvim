@@ -170,6 +170,12 @@ function M.setup(opts)
 		end,
 	})
 
+	-- Add this temporarily to init.lua, inside setup()
+	vim.api.nvim_create_user_command("BufJumpDebug", function()
+		print("Current window ID:", vim.api.nvim_get_current_win())
+		print(vim.inspect(M._win_data))
+	end, {})
+
 	vim.api.nvim_create_user_command("BufJumpList", M.list, {})
 	vim.api.nvim_create_user_command("BufJumpBack", function(cmd)
 		M.back(cmd.count > 0 and cmd.count or 1)
