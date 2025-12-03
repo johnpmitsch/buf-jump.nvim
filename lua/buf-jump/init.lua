@@ -79,6 +79,13 @@ function M.jump(opts)
 
 	local new_index = data.index + (direction * count)
 
+	-- Wrap index when out of bounds
+	if new_index < 1 then
+		new_index = #data.history
+	elseif new_index > #data.history then
+		new_index = 1
+	end
+
 	if new_index >= 1 and new_index <= #data.history then
 		local target_buf = data.history[new_index]
 		if vim.api.nvim_buf_is_valid(target_buf) then
@@ -93,9 +100,6 @@ function M.jump(opts)
 			return
 		end
 	end
-
-	local msg = direction > 0 and "Reached end of buffer history" or "Reached start of buffer history"
-	vim.notify(msg, vim.log.levels.INFO)
 end
 
 function M.back(count)
@@ -181,9 +185,9 @@ function M.setup(opts)
 
 	if mappings then
 		local keys = type(mappings) == "table" and mappings or {}
-		vim.keymap.set("n", keys.list or "gbl", M.list, { desc = "List buffer history" })
-		vim.keymap.set("n", keys.back or "gbp", M.back, { desc = "Previous buffer in history" })
-		vim.keymap.set("n", keys.forward or "gbn", M.forward, { desc = "Next buffer in history" })
+		vim.keymap.set("n", keys.list or "bjl", M.list, { desc = "List buffer history" })
+		vim.keymap.set("n", keys.back or "bjp", M.back, { desc = "Previous buffer in history" })
+		vim.keymap.set("n", keys.forward or "bjn", M.forward, { desc = "Next buffer in history" })
 	end
 end
 

@@ -6,7 +6,7 @@ A lightweight buffer history navigation plugin for Neovim. Navigate through your
 
 - **Per-window history** — Each window maintains its own independent buffer history
 - **Familiar navigation** — Jump back and forward through buffers you've visited
-- **Count support** — Use `3gbp` to jump back 3 buffers at once
+- **Count support** — Use `3bjp` to jump back 3 buffers at once
 - **Clean history** — Automatically removes deleted buffers and ignores unlisted/unnamed buffers
 - **Zero dependencies** — Pure Lua, no external requirements
 
@@ -78,9 +78,9 @@ require("buf-jump").setup({
   -- Set to false to disable default keymaps
   -- Set to a table to customize them
   mappings = {
-    list = "gbl",      -- Show buffer history
-    back = "gbp",      -- Go to previous buffer
-    forward = "gbn",   -- Go to next buffer
+    list = "bjl",      -- Show buffer history
+    back = "bjp",      -- Go to previous buffer
+    forward = "bjn",   -- Go to next buffer
   },
 })
 ```
@@ -111,15 +111,15 @@ require("buf-jump").setup({
 
 | Keymap | Command | Description |
 |--------|---------|-------------|
-| `gbl` | `:BufJumpList` | Display buffer history for current window |
-| `gbp` | `:BufJumpBack` | Jump to previous buffer in history |
-| `gbn` | `:BufJumpForward` | Jump to next buffer in history |
+| `bjl` | `:BufJumpList` | Display buffer history for current window |
+| `bjp` | `:BufJumpBack` | Jump to previous buffer in history |
+| `bjn` | `:BufJumpForward` | Jump to next buffer in history |
 
 All navigation commands support counts:
 
 ```
-3gbp      " Jump back 3 buffers
-2gbn      " Jump forward 2 buffers
+3bjp      " Jump back 3 buffers
+2bjn      " Jump forward 2 buffers
 :5BufJumpBack
 ```
 
